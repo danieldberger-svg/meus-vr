@@ -106,14 +106,15 @@ const FOTOS = [{"src": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
 
 /* ================= Parâmetros ================= */
 const PX_POR_MM = 160 / 25.4;      // densidade nominal de 1 px CSS em celulares (~160 dpi)
-const SEP_PADRAO = 62;             // distância entre centros das lentes do Cardboard [mm]
+const SEP_PADRAO = 50;             // distância entre centros das lentes do Cardboard [mm]
 const ZOOM_PADRAO = 100;           // %
 const OLHAR_MS = 1800;             // tempo de mira para acionar a seta [ms]
 const R_CIL = 10;                  // raio do cilindro da foto [unid. de cena]
 
 function lerNum(k, d) { try { const v = parseFloat(localStorage.getItem(k)); return isFinite(v) ? v : d; } catch (e) { return d; } }
 function gravar(k, v) { try { localStorage.setItem(k, String(v)); } catch (e) {} }
-let sepMm = lerNum('vr_sep_mm', SEP_PADRAO);
+let salvoSep = localStorage.getItem('vr_sep_mm');
+let sepMm = (salvoSep !== null && salvoSep !== '62') ? lerNum('vr_sep_mm', SEP_PADRAO) : SEP_PADRAO;
 let zoomPct = lerNum('vr_zoom', ZOOM_PADRAO);
 
 /* ================= Cena ================= */
